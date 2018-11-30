@@ -39,6 +39,9 @@ public abstract class Area implements Playable {
 	/// The behavior Map
 	private AreaBehavior areaBehavior;
 
+	// boolean to know if this Area has already been started
+	private boolean started = false;
+
 	/**
 	 * @return (float): camera scale factor, assume it is the same in x and y
 	 *         direction
@@ -88,7 +91,10 @@ public abstract class Area implements Playable {
 	public final boolean registerActor(Actor a) {
 		// TODO Bizarre a priori les a sont bons mais bon
 		// TODO implements ERROR
+		System.out.println("Area.registerActor avant test add(actor): " + a);
 		boolean errorOccured = !registeredActors.add(a);
+		System.out.println("apres tetst add(actor) : " + a);
+
 		if (errorOccured) {
 			System.out.println("Actor " + a + " cannot be completely added to registeredActors... ");
 			registeredActors.remove(a);
@@ -167,8 +173,12 @@ public abstract class Area implements Playable {
 		this.window = window;
 		this.fileSystem = fileSystem;
 
+		// on initialise la vue
 		viewCenter = Vector.ZERO;
+		// on initialise le candidat sur lequel on se centre au début (null ici)
 		viewCandidate = null;
+		// on annonce que cette area a deja été begun
+		started = true;
 
 		return true;
 	}
@@ -205,7 +215,7 @@ public abstract class Area implements Playable {
 	private void updateCamera() {
 		// TODO implements ERROR
 
-		if (!viewCandidate.equals(null)) {
+		if (viewCandidate != null) {
 			// devons nous créer un nouveau Vector en faisant une copie profonde ?
 			viewCenter = viewCandidate.getPosition();
 		}
@@ -239,14 +249,15 @@ public abstract class Area implements Playable {
 	 * @param ab
 	 */
 	protected final void setBehavior(AreaBehavior ab) {
-//		TODO
+		// juste mettre le reference ? on peut modifier ab à travers areabehavior now
+		areaBehavior = ab;
 	}
 
 	/**
 	 * @return (boolean) : true if never used
 	 */
 	protected final boolean neverUsed() {
-		// on peut mettre "ou" ou n'utiliser qu'on des deux
-		return (window.equals(null) && fileSystem.equals(null));
+		// neverused() est vrai quand on a pas encore start l'area
+		return !started;
 	}
 }

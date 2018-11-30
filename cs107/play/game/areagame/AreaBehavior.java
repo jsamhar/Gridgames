@@ -15,7 +15,7 @@ public abstract class AreaBehavior {
 	private final Image behaviorMap;
 	private final int width, height;
 	/// We will convert the image into an array of cells
-	private final Cell[][] cells;
+	private Cell[][] cells;
 
 	/**
 	 * Default AreaBehavior Constructor
@@ -26,19 +26,40 @@ public abstract class AreaBehavior {
 	 */
 	public AreaBehavior(Window window, String fileName) {
 		// TODO implements ERROR
-		behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName),null,false);
+		behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
 		width = behaviorMap.getWidth();
 		height = behaviorMap.getHeight();
 		cells = new Cell[width][height];
 	}
 
-	// quelle restriction choisir pour les getters ?? TODO 
+	// quelle restriction choisir pour les getters ?? TODO public protected ? sans
+	// rien
 	public final int getWidth() {
 		return width;
 	}
+
 	public final int getHeight() {
 		return height;
 	}
+
+
+	/**
+	 * Color getter of the pixel at the given row and column
+	 * 
+	 * @param r (int): given row
+	 * @param c (int): given column
+	 * @return (int): RGB color of the pixel at row r and column c as a int value of
+	 *         the image behaviorMap !
+	 */
+	public int getRGBofMap(int r, int c) {
+		return behaviorMap.getRGB(r, c);
+	}
+	
+	//AYAYAYAYAYAY TODO
+	protected Cell[][] getCells() {
+		return cells;
+	}
+
 	/**
 	 * Pour gérer les interactions que les acteurs pourront avoir avec les cellules
 	 * il devront pouvoir y accéder. C’est la raison pour laquelle la classe Cell
@@ -48,11 +69,13 @@ public abstract class AreaBehavior {
 	 * in a way DiscreteCoordinate (1, 1) include all vector (x, y) with x and y in
 	 * [1; 2)
 	 */
-
 	public abstract class Cell {
+		
 		DiscreteCoordinates coordonnees;
 		public Cell(int x, int y) {
-			coordonnees = new DiscreteCoordinates(x, y);					
+//	      @param y (int): The row index --> ordonnee
+//	      @param x (int): The column index --> abscisse
+			coordonnees = new DiscreteCoordinates(x, y);
 		}
 	}
 

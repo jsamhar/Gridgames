@@ -45,22 +45,23 @@ abstract public class AreaGame implements Game {
 	 */
 	protected final Area setCurrentArea(String key, boolean forceBegin) {
 		// TODO implements ERROR
-		if (!currentArea.equals(null)) {
+		if (currentArea != null) {
 			currentArea.suspend();
 		}
-		//meilleur idée que temp ?
+		// meilleur idée que temp ?
 		Area temp = currentArea;
+		// simple affectation car le get renvoi un nouvel objet ?
 		currentArea = areas.get(key);
-		if (!currentArea.equals(null)) {
-			if (currentArea.neverUsed() ||  forceBegin) {
+		if (currentArea != null) {
+			if (currentArea.neverUsed() || forceBegin) {
 				currentArea.begin(window, fileSystem);
 			} else {
 				currentArea.resume(window, fileSystem);
 			}
-		}else {
+		} else {
 			currentArea = temp;
-			if(currentArea.equals(null)) {
-				//lance exception TODO ERROR
+			if (currentArea == null) {
+				// lance exception TODO ERROR
 			}
 		}
 		return null;
@@ -94,7 +95,8 @@ abstract public class AreaGame implements Game {
 
 	@Override
 	public void update(float deltaTime) {
-		// TODO implements me #PROJECT #TUTO
+		// TODO implements ERROR
+		currentArea.update(deltaTime);
 	}
 
 	@Override

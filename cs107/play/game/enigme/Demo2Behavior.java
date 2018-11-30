@@ -40,20 +40,25 @@ public class Demo2Behavior extends AreaBehavior {
 		}
 	}
 
-	public class Demo2Cell extends Cell{
-		//nature de d'une DemoCell
-	private Demo2CellType nature;
+	// publique d'après l'énoncé !!
+	public class Demo2Cell extends Cell {
+		// nature de d'une DemoCell
+		private Demo2CellType nature;
 
-	private Demo2Cell(int x,int	y, Demo2CellType type){
-			super(x,y);
+		private Demo2Cell(int x, int y, Demo2CellType type) {
+			super(x, y);
 			nature = type;
 		}
 	}
 
 	public Demo2Behavior(Window window, String fileName) {
 		super(window, fileName);
-		Demo2CellType cellType = Demo2CellType.toType(getBehaviorMap().getRGB(height - 1 - y, x));
-		Demo2CellType(getWidth(),getHeight(), cellType);
+		for (int x = 0; x < getWidth(); ++x) {
+			for (int y = 0; y < getHeight(); ++y) {
+				Demo2CellType cellType = Demo2CellType.toType(getRGBofMap(getHeight() - 1 - y, x));
+				Demo2Behavior.Demo2Cell cellxy = this.new Demo2Cell(x, y, cellType);
+				getCells()[x][y] = cellxy;
+			}
+		}
 	}
-
 }

@@ -35,12 +35,7 @@ public class MovingRock extends GraphicsEntity {
 
 	@Override
 	public void update(float deltaTime) {
-//		 rajouter en fonction de delta
-//		if (bas) {
 		setCurrentPosition(getPosition().sub(PAS));
-//		} else {
-//			setCurrentPosition(getPosition().add(PAS));
-//		}
 	}
 
 	public float compareTo(Actor a) {
