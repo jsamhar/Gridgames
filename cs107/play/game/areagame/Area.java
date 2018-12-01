@@ -91,9 +91,7 @@ public abstract class Area implements Playable {
 	public final boolean registerActor(Actor a) {
 		// TODO Bizarre a priori les a sont bons mais bon
 		// TODO implements ERROR
-		System.out.println("Area.registerActor avant test add(actor): " + a);
 		boolean errorOccured = !registeredActors.add(a);
-		System.out.println("apres tetst add(actor) : " + a);
 
 		if (errorOccured) {
 			System.out.println("Actor " + a + " cannot be completely added to registeredActors... ");
@@ -179,6 +177,9 @@ public abstract class Area implements Playable {
 		viewCandidate = null;
 		// on annonce que cette area a deja été begun
 		started = true;
+		//initialisation des register
+		registeredActors = new LinkedList<>();
+		unregisteredActors = new LinkedList<>();
 
 		return true;
 	}
@@ -216,7 +217,6 @@ public abstract class Area implements Playable {
 		// TODO implements ERROR
 
 		if (viewCandidate != null) {
-			// devons nous créer un nouveau Vector en faisant une copie profonde ?
 			viewCenter = viewCandidate.getPosition();
 		}
 
@@ -249,7 +249,7 @@ public abstract class Area implements Playable {
 	 * @param ab
 	 */
 	protected final void setBehavior(AreaBehavior ab) {
-		// juste mettre le reference ? on peut modifier ab à travers areabehavior now
+//TODO eror
 		areaBehavior = ab;
 	}
 

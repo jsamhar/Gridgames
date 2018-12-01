@@ -3,7 +3,7 @@ package ch.epfl.cs107.play.game.areagame.actor;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.math.Vector;
 
-
+// pas besoin de créer des copie à chaque affectation
 public enum Orientation {
 
     /// Enumeration elements

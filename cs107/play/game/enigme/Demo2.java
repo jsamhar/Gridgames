@@ -17,17 +17,17 @@ public class Demo2 extends AreaGame {
 	public boolean begin(Window window, FileSystem fileSystem) {
 		// TODO implements ERROR
 		boolean allow = super.begin(window, fileSystem);
-		Area Room0 = new Room0();
-		Area Room1 = new Room1();
-		// on ajoute les deux nouvelles Area dans notre map
-		addArea(Room0);
-		addArea(Room1);
-		System.out.println(Room0);
+		if (allow) {
+			Area Room0 = new Room0();
+			Area Room1 = new Room1();
+			// on ajoute les deux nouvelles Area dans notre map
+			addArea(Room0);
+			addArea(Room1);
 
-		// par défaut Room0 et l'aire courante (le deuxieme argument est pour forcebegin)
-		//BUG TODO
-		setCurrentArea(Room0.getTitle(), true);
-
+			// par défaut Room0 et l'aire courante (le deuxieme argument est pour
+			// forcebegin)
+			setCurrentArea(Room0.getTitle(), true);
+		}
 		return allow;
 	}
 

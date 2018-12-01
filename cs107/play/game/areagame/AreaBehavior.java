@@ -1,5 +1,11 @@
 package ch.epfl.cs107.play.game.areagame;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Image;
@@ -15,7 +21,7 @@ public abstract class AreaBehavior {
 	private final Image behaviorMap;
 	private final int width, height;
 	/// We will convert the image into an array of cells
-	private Cell[][] cells;
+	protected Cell[][] cells;
 
 	/**
 	 * Default AreaBehavior Constructor
@@ -42,7 +48,6 @@ public abstract class AreaBehavior {
 		return height;
 	}
 
-
 	/**
 	 * Color getter of the pixel at the given row and column
 	 * 
@@ -54,11 +59,6 @@ public abstract class AreaBehavior {
 	public int getRGBofMap(int r, int c) {
 		return behaviorMap.getRGB(r, c);
 	}
-	
-	//AYAYAYAYAYAY TODO
-	protected Cell[][] getCells() {
-		return cells;
-	}
 
 	/**
 	 * Pour gérer les interactions que les acteurs pourront avoir avec les cellules
@@ -69,14 +69,28 @@ public abstract class AreaBehavior {
 	 * in a way DiscreteCoordinate (1, 1) include all vector (x, y) with x and y in
 	 * [1; 2)
 	 */
-	public abstract class Cell {
-		
+	public abstract class Cell implements Interactable {
+		// coordonnées basique de la cellule
 		DiscreteCoordinates coordonnees;
+		// pas très clair??
+		Set<Interactable> occupants;
+
 		public Cell(int x, int y) {
 //	      @param y (int): The row index --> ordonnee
 //	      @param x (int): The column index --> abscisse
 			coordonnees = new DiscreteCoordinates(x, y);
+
+			// initialise les occupants
+			occupants = new HashSet<>();
 		}
+
+		@Override
+		public List<DiscreteCoordinates> getCurrentCells() {
+			List<DiscreteCoordinates> position = new LinkedList<DiscreteCoordinates>();
+			position.add(coordonnees);
+			return position;
+		}
+
 	}
 
 }

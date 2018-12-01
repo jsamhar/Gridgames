@@ -12,7 +12,7 @@ public class Demo2Behavior extends AreaBehavior {
 	/*
 	 * en privé car n'est importante que dans notre DEMO TODO
 	 */
-	private enum Demo2CellType {
+	public enum Demo2CellType {
 		NULL(0), WALL(-16777216), // RGB code of black
 		DOOR(-65536), // RGB code of red
 		WATER(-16776961), // RGB code of blue
@@ -57,7 +57,7 @@ public class Demo2Behavior extends AreaBehavior {
 			for (int y = 0; y < getHeight(); ++y) {
 				Demo2CellType cellType = Demo2CellType.toType(getRGBofMap(getHeight() - 1 - y, x));
 				Demo2Behavior.Demo2Cell cellxy = this.new Demo2Cell(x, y, cellType);
-				getCells()[x][y] = cellxy;
+				cells[x][y] =  cellxy;
 			}
 		}
 	}

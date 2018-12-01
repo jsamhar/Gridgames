@@ -48,9 +48,7 @@ abstract public class AreaGame implements Game {
 		if (currentArea != null) {
 			currentArea.suspend();
 		}
-		// meilleur idée que temp ?
-		Area temp = currentArea;
-		// simple affectation car le get renvoi un nouvel objet ?
+		Area previous = currentArea;
 		currentArea = areas.get(key);
 		if (currentArea != null) {
 			if (currentArea.neverUsed() || forceBegin) {
@@ -59,12 +57,12 @@ abstract public class AreaGame implements Game {
 				currentArea.resume(window, fileSystem);
 			}
 		} else {
-			currentArea = temp;
+			currentArea = previous;
 			if (currentArea == null) {
 				// lance exception TODO ERROR
 			}
 		}
-		return null;
+		return currentArea;
 	}
 
 	/** @return (Window) : the Graphic and Audio context */
@@ -87,7 +85,6 @@ abstract public class AreaGame implements Game {
 		this.window = window;
 		this.fileSystem = fileSystem;
 
-		// TODO on initialise currentArea ou pas ?
 		areas = new HashMap<>();
 
 		return true;

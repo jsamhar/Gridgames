@@ -22,9 +22,9 @@ public abstract class Entity implements Actor {
      */
     public Entity(Vector position) {
 
-        if (position == null )
-            throw new NullPointerException();
-        this.currentPosition = position;
+		if (position == null)
+			throw new NullPointerException();
+		this.currentPosition = position;
     }
 
     /**

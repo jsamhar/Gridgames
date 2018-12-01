@@ -6,10 +6,9 @@ package ch.epfl.cs107.play.game.enigme.area.demo2;
 
 public class Room1 extends Demo2Area {
 
-	public Room1() {
-		// par de constructeur dans les superclasses mais c'est plus lisible
-		super();
-		setTitle("Level1");
+	@Override
+	public String getTitle() {
+		// renvoi le nom de l'Area courante
+		return "Level1";
 	}
-
 }
